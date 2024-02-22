@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdpgynbv6bg10"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerController2.gd" id="1_kaluv"]
+[ext_resource type="Texture2D" uid="uid://4y2yxpdxn8e6" path="res://Sprites/TestShip.png" id="2_dxc7o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ud8yk"]
+atlas = ExtResource("2_dxc7o")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7b643"]
+atlas = ExtResource("2_dxc7o")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqpgu"]
+atlas = ExtResource("2_dxc7o")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wbdfo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ud8yk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7b643")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqpgu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uywp0"]
+
+[node name="TestPlayer" type="RigidBody2D"]
+position = Vector2(109, 28)
+gravity_scale = 0.0
+script = ExtResource("1_kaluv")
+speed = 200.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wbdfo")
+frame = 2
+frame_progress = 0.405237
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_uywp0")
