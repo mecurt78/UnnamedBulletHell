@@ -1,9 +1,16 @@
-extends Sprite2D
+extends CharacterBody2D
+class_name TestBullet
 
 ## Number of pixels per second this bullet will move.
 @export var speed : float = 400
 ## The direction this bullet will travel. Positive X is right, positive Y is down.
 @export var direction : Vector2 = Vector2(0.0, -1.0)
+## The amount of damage this bullet will do.
+@export var damage : int = 1
+## Maximum number of collisions the bullet can do before it disappears. TODO: Add animation for hits and despawning?
+@export var maxCollisions : int = 1
+@export var lifeTime : float = 10.0
+var currentLifeTime : float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,5 +19,34 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var distance = speed * delta
-	transform.origin += distance * direction
+	#var distance = speed * delta
+	#transform.origin += distance * direction
+	# Move and check collisions. TODO: Find a way to further separate movement and collision logic.
+	var velocity = speed * direction
+	var collision_count = 0
+	var collision = move_and_collide(velocity * delta)
+	while (collision):
+		var collider = collision.get_collider()
+		if collider is TestEnemy:
+			collider.hit(damage)
+			maxCollisions -= 1
+			break	# Same as break in C++, breaks out of this loop.
+		else:
+			print("Collided with unknown object:")
+			print(collider)
+		# The movement was interrupted by this collision; continue to move.
+		var remainingDistance = collision.get_remainder()
+		collision = move_and_collide(remainingDistance)
+	if (maxCollisions <= 0):
+		queue_free()
+	
+	# Check the lifetime. TODO: Move this into a timer?
+	currentLifeTime += delta
+	if (currentLifeTime > lifeTime):
+		queue_free()
+
+
+func _on_rigid_body_2d_body_entered(body):
+	# Handles the signal for when the bullet's RigidBody2D collides with something.
+	print("Bullet hit something.")
+	pass # Replace with function body.

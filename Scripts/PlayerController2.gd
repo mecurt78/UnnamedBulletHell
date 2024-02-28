@@ -2,7 +2,7 @@ extends RigidBody2D
 
 ## This value is the maximum speed of the object. Measured in pixels/second.
 @export var speed : float = 10.0
-var instancedBullet = preload("res://TestBulet.tscn")
+var instancedBullet = preload("res://TestBullet.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
