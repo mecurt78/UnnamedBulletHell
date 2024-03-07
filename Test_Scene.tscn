@@ -5,7 +5,7 @@
 
 [node name="Node2D" type="Node2D"]
 
-[node name="TestPlayer" parent="." instance=ExtResource("3_s3qwl")]
+[node name="TestPlayer" parent="." groups=["Player"] instance=ExtResource("3_s3qwl")]
 position = Vector2(616, 502)
 
 [node name="TestEnemy" parent="." instance=ExtResource("2_eq383")]

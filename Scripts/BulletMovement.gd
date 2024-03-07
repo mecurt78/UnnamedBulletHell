@@ -11,14 +11,28 @@ class_name TestBullet
 @export var maxCollisions : int = 1
 @export var lifeTime : float = 10.0
 var currentLifeTime : float = 0.0
+@export var collideWithEnemy : bool = true
+@export var collideWithPlayer : bool = false
+
+func _init(dir : Vector2, position, enemy: bool = true, player: bool = false):
+	collideWithEnemy = enemy
+	collideWithPlayer = player
+	direction = dir
+	self.transform.origin = position
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print("bullet created at")
+	print(transform.origin)
 	print("BulletMovement created.")
+	print("Moving towards:")
+	print(direction)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	print("Bullet position is ")
+	print(transform.origin)
 	#var distance = speed * delta
 	#transform.origin += distance * direction
 	# Move and check collisions. TODO: Find a way to further separate movement and collision logic.
@@ -27,10 +41,14 @@ func _process(delta):
 	var collision = move_and_collide(velocity * delta)
 	while (collision):
 		var collider = collision.get_collider()
-		if collider is TestEnemy:
+		if collider is TestEnemy and collideWithEnemy:
+			print("Collided with an enemy.")
 			collider.hit(damage)
 			maxCollisions -= 1
 			break	# Same as break in C++, breaks out of this loop.
+		elif collider is TestPlayer and collideWithPlayer:
+			collider.hit(damage)
+			maxCollisions -= 1
 		else:
 			print("Collided with unknown object:")
 			print(collider)

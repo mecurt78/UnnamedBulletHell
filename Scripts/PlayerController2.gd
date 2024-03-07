@@ -1,7 +1,10 @@
 extends RigidBody2D
+class_name TestPlayer
 
 ## This value is the maximum speed of the object. Measured in pixels/second.
 @export var speed : float = 10.0
+## The health of the player.
+@export var health : int = 5
 var instancedBullet = preload("res://TestBullet.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -45,3 +48,9 @@ func GetSteering():
 		# Go right.
 		x += 1
 	return Vector2(x, y).normalized()
+
+
+func hit(damage: int):
+	health -= damage
+	if health <= 0:
+		queue_free()
