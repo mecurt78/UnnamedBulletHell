@@ -14,11 +14,11 @@ var currentLifeTime : float = 0.0
 @export var collideWithEnemy : bool = true
 @export var collideWithPlayer : bool = false
 
-func _init(dir : Vector2, position, enemy: bool = true, player: bool = false):
-	collideWithEnemy = enemy
-	collideWithPlayer = player
-	direction = dir
-	self.transform.origin = position
+#func _init(dir : Vector2, position, enemy: bool = true, player: bool = false):
+	#collideWithEnemy = enemy
+	#collideWithPlayer = player
+	#direction = dir
+	#self.transform.origin = position
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

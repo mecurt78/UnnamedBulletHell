@@ -8,7 +8,7 @@ class_name TestEnemy
 @export var player : TestPlayer
 
 ## The speed to move.
-@export var speed : float = 20
+@export var speed : float = 100
 
 var shootTimer : Timer
 
