@@ -49,6 +49,9 @@ func _process(delta):
 		elif collider is TestPlayer and collideWithPlayer:
 			collider.hit(damage)
 			maxCollisions -= 1
+		elif collider is TestBullet:
+			# Ignore bullet collisions.
+			break
 		else:
 			print("Collided with unknown object:")
 			print(collider)

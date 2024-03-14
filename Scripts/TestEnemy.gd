@@ -51,8 +51,12 @@ func _process(delta):
 			print("Collided with the player.")
 			collider.hit(1)
 			break	# Same as break in C++, breaks out of this loop.
+		if collider is TestBullet:
+			# Ignore for now.
+			break
 		else:
 			print("Hit something else.")
+			break
 		var remainingDistance = collision.get_remainder()
 		collision = move_and_collide(remainingDistance)
 
