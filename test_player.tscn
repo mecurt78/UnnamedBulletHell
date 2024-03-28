@@ -36,6 +36,7 @@ animations = [{
 
 [node name="TestPlayer" type="RigidBody2D"]
 position = Vector2(109, 28)
+collision_layer = 3
 gravity_scale = 0.0
 script = ExtResource("1_kaluv")
 speed = 200.0

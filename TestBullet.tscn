@@ -6,6 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qs8md"]
 
 [node name="TestBullet" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_2xfd8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

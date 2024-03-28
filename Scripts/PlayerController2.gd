@@ -25,11 +25,11 @@ func _process(delta):
 	# Test firing a bullet.
 	if Input.is_action_just_pressed("fire"):
 		# Fire a bullet.
-		var newBullet = instancedBullet.instantiate()
+		var dir = Vector2(0.0, -1.0)
+		var pos = transform.origin + Vector2(0.0, -50.0)
+		var newBullet = BulletSpawner.new_bullet(dir, pos, TestBullet.CollisionType.COLLIDE_WITH_ENEMY)
 		# Assume the parent of this game object is the level.
 		get_parent().add_child(newBullet)
-		# Set the bullet to be slightly in front of the player ship.
-		newBullet.transform.origin = transform.origin + Vector2(0.0, -50.0)
 
 # Get the direction to move.
 func GetSteering():

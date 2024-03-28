@@ -20,7 +20,7 @@ func _ready():
 	shootTimer = Timer.new()
 	add_child(shootTimer)
 	shootTimer.connect("timeout", shoot)
-	shootTimer.wait_time = 5.0
+	shootTimer.wait_time = 0.5
 	shootTimer.start()
 	print("Created TestEnemy.")
 	
@@ -77,3 +77,9 @@ func shoot():
 	##var bulletInstance = instancedBullet.instance()
 	#bulletInstance._init(direction, position)
 	#add_child(bulletInstance)
+	# Fire a bullet.
+	var dir = Vector2(0.0, 1.0)
+	var pos = transform.origin + Vector2(0.0, 50.0)
+	var newBullet = BulletSpawner.new_bullet(dir, pos, TestBullet.CollisionType.COLLIDE_WITH_PLAYER)
+	# Assume the parent of this game object is the level.
+	get_parent().add_child(newBullet)
